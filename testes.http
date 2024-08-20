@@ -1,0 +1,4 @@
+# Requisição para a rota principal
+GET http://localhost:3000/users
+
+
