@@ -1,13 +1,14 @@
+import dotenv from 'dotenv';
 import mysql from 'mysql2';
 import express from 'express';
+import routes from './routes/index.js';
 import  createConnection  from './config/dbConnect.js';
-import dotenv from 'dotenv';
 
 dotenv.config(); 
 
 const port = 3003;
 const app = express();
-app.use(express.json());
+routes(app);
 
 const connection = await createConnection();
 
@@ -39,17 +40,6 @@ db.connect((err) => {
   }
 });
 
-const livros = [
-  {
-      id: 1,
-      titulo: "É assim que acaba"
-  },
-  {
-      id: 2,
-      titulo: "A gente mira no amor e acerta na solidão"
-  }
-];
-
 function buscaLivros(id) {
   return livros.findIndex(livro => {
     return livro.id === Number(id);
@@ -73,7 +63,6 @@ app.get('/', (req, res) => {
   });
 });
 
-
 // Rota para testar o banco de dados
 app.get('/users', (req, res) => {
   console.log('Requisição recebida na rota /users');
@@ -89,15 +78,6 @@ app.get('/users', (req, res) => {
     }
   });
 });
-
-app.get('/livros', (req, res) => {
-  res.status(200).json(livros);
-});
-
-app.post('/livros', (req, res) => {
-  livros.push(req.body);
-  res.status(201).json({ message: 'Livro cadastrado com sucesso!', livros });
-})
 
 app.get('/livros/:id', (req, res) => {
     const bookIndex = buscaLivros(req.params.id);

@@ -19,6 +19,10 @@
     "mysql2": "^3.11.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.3.3"
   }
 }
