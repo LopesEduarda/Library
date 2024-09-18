@@ -60,15 +60,12 @@ class BookController {
     try {
         const editora = req.query.editora;
 
-        // Busca pela editora no banco de dados
         const foundBook = await book.find({ editora: editora });
 
-        // Validação para editora não encontrada
         if (!foundBook) {
         return res.status(404).send({ message: 'Editora não encontrada!' });
         }
 
-        // Se a editora for encontrada, retorna o livro
         res.status(200).send({foundBook});
     } catch (error) {
         res.status(500).json({ message: error.message });
